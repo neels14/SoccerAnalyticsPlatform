@@ -9,12 +9,13 @@ Soccer Analytics Platform which provides users with a web interface to extract i
 
 ## Setup
 
-1. Clone the repository, and cd into the cloned directory
-2. Run command: "docker-compose up" - this step spins up a MySQL database in a docker container
+1. Clone the repository, and ```cd``` into the cloned directory
+
+2. In a new terminal: ```docker-compose up``` - this step spins up a MySQL database in a docker container
 
 Note: you must have Docker Desktop setup on your local machine in order to run the second step. If not, download it from the Docker website.
 
-4. In another terminal, run command: "go run main.go" - runs the backend code to connect to the MySQL database and run sample queries.
+4. In another terminal window, run command: ```go run main.go``` - runs the backend code to connect to the MySQL database and run sample queries.
 
 ### Sample Queries
 
