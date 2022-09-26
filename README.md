@@ -19,10 +19,11 @@ Note: you must have Docker Desktop setup on your local machine in order to run t
 
 ### Sample Queries
 
-CREATE TABLE ...
+```CREATE TABLE test ( id integer, name varchar(32) )```
 
-INSERT ....
+```INSERT INTO test VALUES ( 1, 'Neel' ), ( 2, 'Anu' ), ( 3, 'Aashrit') , ( 4, 'Hamza' )```
 
-SELECT * FROM ...
+```SELECT * FROM test```:
 
-(insert ss)
+<img width="92" alt="image" src="https://user-images.githubusercontent.com/47669914/192190995-27bcac6a-0dfd-4ab6-b1e4-03a94d474643.png">
+
