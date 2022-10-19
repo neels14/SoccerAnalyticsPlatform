@@ -1,4 +1,6 @@
+SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS PlayerPlaysInMatch;
+SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE IF NOT EXISTS PlayerPlaysInMatch (
     player_name VARCHAR(64),
@@ -13,4 +15,4 @@ CREATE TABLE IF NOT EXISTS PlayerPlaysInMatch (
     PRIMARY KEY(player_name, shirt_number, player_country, year, stage, home_team_country, away_team_country),
     FOREIGN KEY(player_name, shirt_number, player_country) REFERENCES Player(name, shirt_number, country),
     FOREIGN KEY(year, stage, home_team_country, away_team_country) REFERENCES SoccerMatch(year, stage, home_team_country, away_team_country)
-)
+) ENGINE=INNODB;
