@@ -26,9 +26,72 @@ func main() {
 
 	//Loads queries from file
 	dot := SetupDot(db)
+	fmt.Println("---Countries that has finished at the top the most---")
 	featureTop(dot, db)
+	fmt.Println("---Countries that has placed the most---")
 	featurePodium(dot, db)
+	fmt.Println("---WC that have the most popular attendance---")
+	featureMostPopularWCAttendance(dot, db)
+	fmt.Println("---Countries that have scored the most goals---")
+	featureCountriesTopGoalScorer(dot, db)
+	fmt.Println("---Average goals scored per countries---")
+	featureCountriesAverageGoalScoredMatch(dot, db)
 
+}
+
+func featureMostPopularWCAttendance(dot *dotsql.DotSql, db *sql.DB) {
+	dot.Exec(db, "create-view-WorldCupAttendances")
+	rows, errRunFeaturePodium := dot.Query(db, "create-table-MostPopularWCByAttendance")
+	if errRunFeaturePodium != nil {
+		panic(errRunFeaturePodium.Error())
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var year int
+		var attendance int
+		if err := rows.Scan(&year, &attendance); err != nil {
+			panic(err)
+		}
+		fmt.Println("Year:", year, "has attendence", attendance)
+	}
+}
+
+func featureCountriesTopGoalScorer(dot *dotsql.DotSql, db *sql.DB) {
+	dot.Exec(db, "create-view-CountryGoalScorers")
+	dot.Exec(db, "create-view-CountryMostGoals")
+	rows, errRunFeaturePodium := dot.Query(db, "create-table-TopGoalScorerByCountry")
+	if errRunFeaturePodium != nil {
+		panic(errRunFeaturePodium.Error())
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var country_name string
+		var goal_name string
+		var goals int
+		if err := rows.Scan(&country_name, &goal_name, &goals); err != nil {
+			panic(err)
+		}
+		fmt.Println(country_name, goal_name, goals)
+	}
+}
+
+func featureCountriesAverageGoalScoredMatch(dot *dotsql.DotSql, db *sql.DB) {
+	dot.Exec(db, "create-view-CountryGoalsScored")
+	dot.Exec(db, "create-view-CountryTotalAppearances")
+	dot.Exec(db, "create-view-CountryAvgData")
+	rows, errRunFeaturePodium := dot.Query(db, "create-table-AvgGoalsInMatchByCountry")
+	if errRunFeaturePodium != nil {
+		panic(errRunFeaturePodium.Error())
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var country_name string
+		var avg_goals_match float32
+		if err := rows.Scan(&country_name, &avg_goals_match); err != nil {
+			panic(err)
+		}
+		fmt.Println(country_name, ":", avg_goals_match)
+	}
 }
 
 func featurePodium(dot *dotsql.DotSql, db *sql.DB) {
@@ -42,11 +105,11 @@ func featurePodium(dot *dotsql.DotSql, db *sql.DB) {
 	defer rows.Close()
 	for rows.Next() {
 		var country_name string
-		var wins int
-		if err := rows.Scan(&country_name, &wins); err != nil {
+		var timesPlaced int
+		if err := rows.Scan(&country_name, &timesPlaced); err != nil {
 			panic(err)
 		}
-		fmt.Printf("%s and %d\n", country_name, wins)
+		fmt.Println(country_name, "placed", timesPlaced, "times")
 	}
 }
 func featureTop(dot *dotsql.DotSql, db *sql.DB) {
@@ -62,7 +125,7 @@ func featureTop(dot *dotsql.DotSql, db *sql.DB) {
 		if err := rows.Scan(&country_name, &wins); err != nil {
 			panic(err)
 		}
-		fmt.Printf("%s and %d\n", country_name, wins)
+		fmt.Println(country_name, "won", wins, "times")
 	}
 }
 
@@ -96,11 +159,23 @@ func SetupDot(db *sql.DB) *dotsql.DotSql {
 	if errFeaturePodium != nil {
 		panic(errFeaturePodium.Error())
 	}
+	dotMostPopularWCAttendance, errMostPopularWCAttendance := dotsql.LoadFromFile("../sql/features/most_popular_WC_attendance.sql")
+	if errMostPopularWCAttendance != nil {
+		panic(errMostPopularWCAttendance.Error())
+	}
+	dotTopCountriesGoalScorer, errTopCountriesGoalScorer := dotsql.LoadFromFile("../sql/features/countries_top_goal_scorer.sql")
+	if errTopCountriesGoalScorer != nil {
+		panic(errTopCountriesGoalScorer.Error())
+	}
+	dotAverageGoalScored, errAverageGoalScored := dotsql.LoadFromFile("../sql/features/countries_average_goals_scored_match.sql")
+	if errAverageGoalScored != nil {
+		panic(errAverageGoalScored.Error())
+	}
 	dotPopulateTestData, errPopulateTestData := dotsql.LoadFromFile("../sql/test_data/populate_test_db.sql")
 	if errPopulateTestData != nil {
 		panic(errPopulateTestData.Error())
 	}
-	dot := dotsql.Merge(dotDDLCountries, dotDDLPlayersInMatch, dotDDLPlayer, dotDDLSoccerMatch, dotDDLWorldCup, dotFeatureTopWinning, dotPopulateTestData, dotFeaturePodium)
+	dot := dotsql.Merge(dotDDLCountries, dotDDLPlayersInMatch, dotDDLPlayer, dotDDLSoccerMatch, dotDDLWorldCup, dotFeatureTopWinning, dotPopulateTestData, dotFeaturePodium, dotMostPopularWCAttendance, dotTopCountriesGoalScorer, dotAverageGoalScored)
 	dot.Exec(db, "ddl-country-set-foreign-0")
 	dot.Exec(db, "ddl-country-drop-if-exists")
 	dot.Exec(db, "ddl-country-set-foreign-1")
