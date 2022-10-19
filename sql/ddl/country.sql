@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS Country;
+
+CREATE TABLE IF NOT EXISTS Country (
+    name VARCHAR(64) PRIMARY KEY,
+    team_initials CHAR(3) NOT NULL UNIQUE
+)
