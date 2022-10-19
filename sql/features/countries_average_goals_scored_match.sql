@@ -31,5 +31,6 @@ ON CountryGoalsScored.country_name = CountryTotalAppearances.country_name;
 -- name: create-table-AvgGoalsInMatchByCountry
 SELECT country_name, goals_scored/matches_played AS avg_goals_match
 FROM CountryAvgData
+WHERE country_name = ?
 ORDER BY avg_goals_match DESC, country_name;
 

@@ -26,17 +26,30 @@ func main() {
 
 	//Loads queries from file
 	dot := SetupDot(db)
-
-	fmt.Println("---Countries that has finished at the top the most---")
-	featureTop(dot, db)
-	fmt.Println("---Countries that has placed the most---")
+	var topWinner string
+	var topGoalScorer string
+	var averageGoalScorer string
+	fmt.Println("---Feature 1: Countries that has finished at the top---")
+	fmt.Println("Please pick a country (Hint choose Canada or Argentina): ")
+	fmt.Scan(&topWinner)
+	featureTop(dot, db, topWinner)
+	fmt.Println("")
+	fmt.Println("---Feature 2:Countries that has placed the most---")
 	featurePodium(dot, db)
-	fmt.Println("---WC that have the most popular attendance---")
+	fmt.Println("")
+	fmt.Println("---Feature 3:WC that have the most popular attendance---")
 	featureMostPopularWCAttendance(dot, db)
-	fmt.Println("---Highest Goal Scorer per country---")
-	featureCountriesTopGoalScorer(dot, db)
-	fmt.Println("---Average goals scored per countries---")
-	featureCountriesAverageGoalScoredMatch(dot, db)
+	fmt.Println("")
+	fmt.Println("---Feature 4:Highest Goal Scorer given country---")
+	fmt.Println("Please pick a country (Hint choose Canada or Argentina or Brazil): ")
+	fmt.Scan(&topGoalScorer)
+	featureCountriesTopGoalScorer(dot, db, topGoalScorer)
+	fmt.Println("")
+	fmt.Println("---Feature 5: Average goals scored given country---")
+	fmt.Println("Please pick a country (Hint choose Canada or Argentina or Brazil): ")
+	fmt.Scan(&averageGoalScorer)
+	featureCountriesAverageGoalScoredMatch(dot, db, averageGoalScorer)
+	fmt.Println("")
 
 }
 
@@ -57,10 +70,11 @@ func featureMostPopularWCAttendance(dot *dotsql.DotSql, db *sql.DB) {
 	}
 }
 
-func featureCountriesTopGoalScorer(dot *dotsql.DotSql, db *sql.DB) {
+func featureCountriesTopGoalScorer(dot *dotsql.DotSql, db *sql.DB, country_name string) {
 	dot.Exec(db, "create-view-CountryGoalScorers")
 	dot.Exec(db, "create-view-CountryMostGoals")
-	rows, errRunFeaturePodium := dot.Query(db, "create-table-TopGoalScorerByCountry")
+	//
+	rows, errRunFeaturePodium := dot.Query(db, "create-table-TopGoalScorerByCountry", country_name)
 	if errRunFeaturePodium != nil {
 		panic(errRunFeaturePodium.Error())
 	}
@@ -76,11 +90,11 @@ func featureCountriesTopGoalScorer(dot *dotsql.DotSql, db *sql.DB) {
 	}
 }
 
-func featureCountriesAverageGoalScoredMatch(dot *dotsql.DotSql, db *sql.DB) {
+func featureCountriesAverageGoalScoredMatch(dot *dotsql.DotSql, db *sql.DB, country_name string) {
 	dot.Exec(db, "create-view-CountryGoalsScored")
 	dot.Exec(db, "create-view-CountryTotalAppearances")
 	dot.Exec(db, "create-view-CountryAvgData")
-	rows, errRunFeaturePodium := dot.Query(db, "create-table-AvgGoalsInMatchByCountry")
+	rows, errRunFeaturePodium := dot.Query(db, "create-table-AvgGoalsInMatchByCountry", country_name)
 	if errRunFeaturePodium != nil {
 		panic(errRunFeaturePodium.Error())
 	}
@@ -113,9 +127,9 @@ func featurePodium(dot *dotsql.DotSql, db *sql.DB) {
 		fmt.Println(country_name, "placed", timesPlaced, "times")
 	}
 }
-func featureTop(dot *dotsql.DotSql, db *sql.DB) {
+func featureTop(dot *dotsql.DotSql, db *sql.DB, country_name string) {
 	dot.Exec(db, "top-winning-countries-first-view")
-	rows, errRunFeatureTopWinning := dot.Query(db, "top-winning-countries-first")
+	rows, errRunFeatureTopWinning := dot.Query(db, "top-winning-countries-first", country_name)
 	if errRunFeatureTopWinning != nil {
 		panic(errRunFeatureTopWinning.Error())
 	}
