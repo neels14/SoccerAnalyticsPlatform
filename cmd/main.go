@@ -29,7 +29,7 @@ func main() {
 	defer db.Close()
 
 	// CREATE table test
-	_, err = db.Exec("CREATE TABLE test ( id integer, name varchar(32) )")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS test ( id integer, name varchar(32) )")
 	if err != nil {
 		panic(err.Error())
 	}
