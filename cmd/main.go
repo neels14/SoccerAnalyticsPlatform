@@ -26,13 +26,14 @@ func main() {
 
 	//Loads queries from file
 	dot := SetupDot(db)
+
 	fmt.Println("---Countries that has finished at the top the most---")
 	featureTop(dot, db)
 	fmt.Println("---Countries that has placed the most---")
 	featurePodium(dot, db)
 	fmt.Println("---WC that have the most popular attendance---")
 	featureMostPopularWCAttendance(dot, db)
-	fmt.Println("---Countries that have scored the most goals---")
+	fmt.Println("---Highest Goal Scorer per country---")
 	featureCountriesTopGoalScorer(dot, db)
 	fmt.Println("---Average goals scored per countries---")
 	featureCountriesAverageGoalScoredMatch(dot, db)
@@ -183,19 +184,12 @@ func SetupDot(db *sql.DB) *dotsql.DotSql {
 	if errCreateCountries != nil {
 		panic(errCreateCountries.Error())
 	}
-	dot.Exec(db, "ddl-player-play-set-foreign-0")
-	dot.Exec(db, "ddl-player-play-drop-table-if-exists")
-	dot.Exec(db, "ddl-player-play-create-table")
-	_, errCreatePlayerPlay := dot.Exec(db, "ddl-player-play-create-table")
-	if errCreatePlayerPlay != nil {
-		panic(errCreatePlayerPlay.Error())
-	}
 	dot.Exec(db, "ddl-player-set-foreign-0")
 	dot.Exec(db, "ddl-player-drop-if-exists")
 	dot.Exec(db, "ddl-player-play-create-table")
 	_, errCreatePlayer := dot.Exec(db, "ddl-player-create-player")
 	if errCreatePlayer != nil {
-		panic(errCreatePlayerPlay.Error())
+		panic(errCreatePlayer.Error())
 	}
 	dot.Exec(db, "ddl-match-set-foreign-0")
 	dot.Exec(db, "ddl-match-drop-if-exists")
@@ -204,6 +198,14 @@ func SetupDot(db *sql.DB) *dotsql.DotSql {
 	if errCreateMatches != nil {
 		panic(errCreateMatches.Error())
 	}
+	dot.Exec(db, "ddl-player-play-set-foreign-0")
+	dot.Exec(db, "ddl-player-play-drop-table-if-exists")
+	dot.Exec(db, "ddl-player-play-create-table")
+	_, errCreatePlayerPlay := dot.Exec(db, "ddl-player-play-create-table")
+	if errCreatePlayerPlay != nil {
+		panic(errCreatePlayerPlay.Error())
+	}
+
 	dot.Exec(db, "ddl-world-cup-set-foreign-0")
 	dot.Exec(db, "ddl-world-cup-drop-if-exists")
 	dot.Exec(db, "ddl-world-cup-create-table")

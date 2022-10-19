@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS PlayerPlaysInMatch;
+DROP TABLE IF EXISTS Player;
+DROP TABLE IF EXISTS SoccerMatch;
+DROP TABLE IF EXISTS test;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS WorldCup;
+DROP TABLE IF EXISTS Country;
+DROP VIEW IF EXISTS CountryAvgData;
+DROP VIEW IF EXISTS CountryGoalScorers;
+DROP VIEW IF EXISTS CountryGoalsScored;
+DROP VIEW IF EXISTS CountryMostGoals;
+DROP VIEW IF EXISTS CountryTotalAppearances;
+DROP VIEW IF EXISTS FirstPlaceWinners;
+DROP VIEW IF EXISTS SecondPlaceWinners;
+DROP VIEW IF EXISTS ThirdPlaceWinners;
+DROP VIEW IF EXISTS WorldCupAttendances;
