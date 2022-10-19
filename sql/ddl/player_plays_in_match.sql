@@ -1,7 +1,10 @@
+-- name: ddl-player-play-set-foreign-0
 SET FOREIGN_KEY_CHECKS=0;
+-- name: ddl-player-drop-table-if-exists
 DROP TABLE IF EXISTS PlayerPlaysInMatch;
+-- name: ddl-player-play-set-foreign-1
 SET FOREIGN_KEY_CHECKS=1;
-
+-- name: ddl-player-play-create-table
 CREATE TABLE IF NOT EXISTS PlayerPlaysInMatch (
     player_name VARCHAR(64),
     shirt_number INT,

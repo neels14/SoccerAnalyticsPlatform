@@ -1,7 +1,10 @@
+-- name: ddl-match-set-foreign-0
 SET FOREIGN_KEY_CHECKS=0;
+-- name: ddl-match-drop-if-exists
 DROP TABLE IF EXISTS SoccerMatch;
+-- name: ddl-match-set-foreign-1
 SET FOREIGN_KEY_CHECKS=1;
-
+-- name: ddl-match-create-matches
 CREATE TABLE IF NOT EXISTS SoccerMatch (
     year YEAR REFERENCES WorldCup(year),
     stage VARCHAR(64),

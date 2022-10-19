@@ -1,5 +1,8 @@
-module src
+module cmd
 
 go 1.19
 
-require github.com/go-sql-driver/mysql v1.6.0 // indirect
+require (
+	github.com/go-sql-driver/mysql v1.6.0
+	github.com/qustavo/dotsql v1.1.0
+)

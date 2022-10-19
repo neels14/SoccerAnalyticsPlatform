@@ -1,2 +1,6 @@
 github.com/go-sql-driver/mysql v1.6.0 h1:BCTh4TKNUYmOmMUcQ3IipzF5prigylS7XXjEkfCHuOE=
 github.com/go-sql-driver/mysql v1.6.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
+github.com/mxk/go-sqlite v0.0.0-20140611214908-167da9432e1f h1:QlH4jpcTbMzpK5ymxjC6k/m22jkcS7uSUeiB9tF8qKs=
+github.com/mxk/go-sqlite v0.0.0-20140611214908-167da9432e1f/go.mod h1:pkc41e3zYdLbnNZr/Zr5u/Ozr7D0p8EorhQiE+DmM4Y=
+github.com/qustavo/dotsql v1.1.0 h1:Yw+x4HacArj41O4z4oDso1KZqQ+if7O2jj8igcLqGM0=
+github.com/qustavo/dotsql v1.1.0/go.mod h1:ypGu9g6a8LYpavOT8VBsJO+plC0tLW6onMxwMvyoZIM=
