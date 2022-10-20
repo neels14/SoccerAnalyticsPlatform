@@ -7,3 +7,5 @@ ORDER BY total_wins DESC, country_name;
 -- name: top-winning-countries-first
 SELECT * FROM FirstPlaceWinners
 WHERE country_name = ?;
+-- name: top-winning-countries-first-without-name
+SELECT * FROM FirstPlaceWinners;

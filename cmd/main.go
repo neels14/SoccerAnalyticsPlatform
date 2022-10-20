@@ -41,7 +41,7 @@ func main() {
 	featureMostPopularWCAttendance(dot, db)
 	fmt.Println("")
 	fmt.Println("---Feature 4:Highest Goal Scorer given country---")
-	fmt.Println("Please pick a country (Hint choose Canada or Argentina or Brazil): ")
+	fmt.Println("Please pick a country (Hint choose Argentina or Brazil): ")
 	fmt.Scan(&topGoalScorer)
 	featureCountriesTopGoalScorer(dot, db, topGoalScorer)
 	fmt.Println("")

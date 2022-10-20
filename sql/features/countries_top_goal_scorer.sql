@@ -17,3 +17,9 @@ SELECT top_scorer_country, goal_scorer_name, top_scorer_goals
 FROM CountryGoalScorers, CountryMostGoals
 WHERE top_scorer_country = goal_scorer_country AND top_scorer_goals = goal_scorer_goals AND top_scorer_country = ?
 ORDER BY top_scorer_goals DESC, top_scorer_country, goal_scorer_name;
+
+-- name: create-table-TopGoalScorerByCountry-without-country
+SELECT top_scorer_country, goal_scorer_name, top_scorer_goals
+FROM CountryGoalScorers, CountryMostGoals
+WHERE top_scorer_country = goal_scorer_country AND top_scorer_goals = goal_scorer_goals
+ORDER BY top_scorer_goals DESC, top_scorer_country, goal_scorer_name;
