@@ -1,12 +1,11 @@
--- Average number of goals in a match for each country over all World Cups
+-- Average number of goals in a match for each country over all World Cups 
+-- TEST DATABASE CODE FOR PP1
 
--- name: create-view-CountryGoalsScored
 CREATE OR REPLACE VIEW CountryGoalsScored AS
 SELECT player_country as country_name, SUM(goals_scored) as country_goals_scored
 FROM PlayerPlaysInMatch
 GROUP BY player_country;
 
--- name: create-view-CountryTotalAppearances
 CREATE OR REPLACE VIEW CountryTotalAppearances AS
 SELECT country_name, SUM(country_matches) AS num_matches
 FROM (
@@ -19,7 +18,6 @@ FROM (
      GROUP BY away_team_country)) AS TotalMatches
 GROUP BY country_name;
 
--- name: create-view-CountryAvgData
 CREATE OR REPLACE VIEW CountryAvgData AS
 SELECT
     CountryTotalAppearances.country_name AS country_name,
@@ -28,14 +26,13 @@ SELECT
 FROM CountryGoalsScored RIGHT OUTER JOIN CountryTotalAppearances
 ON CountryGoalsScored.country_name = CountryTotalAppearances.country_name;
 
--- name: create-table-AvgGoalsInMatchByCountry
+-- specific country query
 SELECT country_name, goals_scored/matches_played AS avg_goals_match
 FROM CountryAvgData
-WHERE country_name = ?
+WHERE country_name = "Argentina"
 ORDER BY avg_goals_match DESC, country_name;
 
--- name: create-table-AvgGoalsInMatchByCountry-without-country
+-- All countries query
 SELECT country_name, goals_scored/matches_played AS avg_goals_match
 FROM CountryAvgData
 ORDER BY avg_goals_match DESC, country_name;
-
