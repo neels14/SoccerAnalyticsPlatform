@@ -1,6 +1,6 @@
 # SoccerAnalyticsPlatform
 
-Soccer Analytics Platform which provides users with a web interface to extract insights from past FIFA world cups data. For instance, users can query information related to matches, players, and teams. It will include all of the core CRUD (create, read, update, and delete) operations.
+Soccer Analytics Platform which provides users with a web interface to extract insights from past FIFA world cups data. For instance, users can query information related to matches, players, and teams.
 
 ## Technical Implementation
 * Backend = Golang
@@ -15,15 +15,14 @@ Soccer Analytics Platform which provides users with a web interface to extract i
 
 Note: you must have Docker Desktop setup on your local machine in order to run the second step. If not, download it from the Docker website.
 
-4. In another terminal window, run command: ```go run main.go``` - runs the backend code to connect to the MySQL database and run sample queries.
+3. In another terminal window, change your current directory into /cmd by running ```cd cmd/```. Then, run command: ```go run main.go```.
+This will start the program, which begins by connecting to the MySQL database which you ran via docker, creates the necessary tables defined in our database schema, and then populates them with the sample test data.
 
-### Sample Queries
+### Program CLI
 
-```CREATE TABLE test ( id integer, name varchar(32) )```
+From here, the program will prompt you (the user) to enter certain parameters which our sql query features will use to run and provide you with information you might be interested in. Some features which are outputted require a user input (parameter) while others run without a user input.
 
-```INSERT INTO test VALUES ( 1, 'Neel' ), ( 2, 'Anu' ), ( 3, 'Aashrit') , ( 4, 'Hamza' )```
+<img width="838" alt="Screen Shot 2022-10-20 at 7 54 13 AM" src="https://user-images.githubusercontent.com/113378391/196941486-797a97c3-16f4-4382-8a2f-3f0115cb4711.png">
 
-```SELECT * FROM test```:
 
-<img width="92" alt="image" src="https://user-images.githubusercontent.com/47669914/192190995-27bcac6a-0dfd-4ab6-b1e4-03a94d474643.png">
 
