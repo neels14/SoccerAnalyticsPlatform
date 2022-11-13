@@ -18,6 +18,7 @@ func main() {
 			country.GET("/", routes.GetAllCountries)
 			country.GET("/averageGoal", routes.AverageGoalByCountry)
 			country.GET("/averageGoal/:name", routes.AverageGoalForCountry)
+			country.GET("/winRatio", routes.WinRatio)
 		}
 
 		matches := v1.Group("/matches")
@@ -29,6 +30,7 @@ func main() {
 			players.GET("/", routes.GetAllPlayer)
 			players.GET("/topScorer", routes.GetTopScorers)
 			players.GET("/topScorer/:country", routes.GetTopScorersWithCountry)
+			players.GET("/mostStarted", routes.GetMostStarted)
 		}
 		world_cup := v1.Group("/worldCup")
 		{
@@ -39,7 +41,6 @@ func main() {
 			world_cup.GET("/podium", routes.Podium)
 			world_cup.GET("/podium/:country", routes.PodiumWithCountry)
 		}
-
 	}
 	r.Run()
 	initalize.GetDB().Close()

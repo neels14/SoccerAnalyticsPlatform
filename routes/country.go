@@ -70,3 +70,24 @@ func AverageGoalForCountry(c *gin.Context) {
 	c.JSON(200, countries)
 
 }
+
+func WinRatio(c *gin.Context) {
+	dot := initalize.GetInstance()
+	rows, errAllCountries := dot.Query(initalize.GetDB(), "Country-Win-Ratio")
+	if errAllCountries != nil {
+		panic(errAllCountries.Error())
+	}
+	defer rows.Close()
+	countries := []types.WinRatio{}
+	for rows.Next() {
+		var country types.WinRatio
+		err := rows.Scan(&country.Country, &country.WinRatio)
+		if err != nil {
+			panic(err.Error()) // proper error handling instead of panic in your app
+		}
+		countries = append(countries, country)
+
+	}
+	c.JSON(200, countries)
+
+}

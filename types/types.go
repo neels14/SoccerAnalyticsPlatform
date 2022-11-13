@@ -62,3 +62,15 @@ type Winner struct {
 	Country string `json:"country_name"`
 	Wins    int    `json:"total_win"`
 }
+
+type PlayerMostStarted struct {
+	Name        string  `json:"playerName"`
+	ShirtNumber int     `json:"shirtNumber"`
+	Country     string  `json:"country"`
+	StartRatio  float64 `json:"startRatio"`
+}
+
+type WinRatio struct {
+	Country  string  `json:"country"`
+	WinRatio float64 `json:"winRatio"`
+}

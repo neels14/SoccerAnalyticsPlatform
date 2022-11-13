@@ -17,6 +17,33 @@ var initalizedDB *sql.DB
 const testDBName string = "testdb"
 const prodDBName string = "proddb"
 
+func csvMatches(wg *sync.WaitGroup, db *sql.DB, dot *dotsql.DotSql) {
+	println("Started CSV MATCHES")
+	defer wg.Done()
+	dot.Exec(db, "CSV-DROP-WorldCupMatchesCSV")
+	dot.Exec(db, "CSV-Table-WorldCupMatches")
+	dot.Exec(db, "CSV-Table-WorldCupMatches-Insert")
+	println("Done CSV MATCHES")
+}
+
+func csvPlayers(wg *sync.WaitGroup, db *sql.DB, dot *dotsql.DotSql) {
+	println("Started CSV PLAYERS")
+	defer wg.Done()
+	dot.Exec(db, "CSV-DROP-WorldCupPlayersCSV")
+	dot.Exec(db, "CSV-Table-WorldCupPlayersCSV")
+	dot.Exec(db, "CSV-Table-WorldCupPlayers-Insert")
+	println("Done CSV PLAYERS")
+}
+
+func csvWorldCups(wg *sync.WaitGroup, db *sql.DB, dot *dotsql.DotSql) {
+	println("Started CSV WC")
+	defer wg.Done()
+	dot.Exec(db, "CSV-DROP-WorldCupsCSV")
+	dot.Exec(db, "CSV-Table-WorldCupsCSV")
+	dot.Exec(db, "CSV-Table-WorldCupsCSV-Insert")
+	println("Done CSV WC")
+}
+
 func GetDB() *sql.DB {
 	if initalizedDB == nil {
 		lockDB.Lock()
@@ -124,7 +151,19 @@ func GetInstance() *dotsql.DotSql {
 			if errPopulateWC != nil {
 				panic(errPopulateWC.Error())
 			}
+
+			dotWinRatio, errWinRatio := dotsql.LoadFromFile("./sql/features/countries_win_ratio.sql")
+			if errWinRatio != nil {
+				panic(errPopulateWC.Error())
+			}
+
+			dotPlayerMostStarted, errPlayerMostStarted := dotsql.LoadFromFile("./sql/features/players_most_started.sql")
+			if errPlayerMostStarted != nil {
+				panic(errPlayerMostStarted.Error())
+			}
+			println("Merging")
 			dot := dotsql.Merge(
+				dotPlayerMostStarted,
 				dotPopulateProdPlayerInMatch,
 				dotPopulateProdPlayer,
 				dotPopulateWC,
@@ -144,7 +183,9 @@ func GetInstance() *dotsql.DotSql {
 				dotPopulateWorldCupMatches,
 				dotPopulateWorldCupPlayers,
 				dotPopulateWorldCup,
+				dotWinRatio,
 			)
+			println("Done Loading")
 			dot.Exec(db, "ddl-country-set-foreign-0")
 			dot.Exec(db, "ddl-country-drop-if-exists")
 			dot.Exec(db, "ddl-country-set-foreign-1")
@@ -181,23 +222,41 @@ func GetInstance() *dotsql.DotSql {
 			if errCreateWorldCup != nil {
 				panic(errCreateWorldCup.Error())
 			}
-			dot.Exec(db, "CSV-DROP-WorldCupMatchesCSV")
-			dot.Exec(db, "CSV-Table-WorldCupMatches")
-			dot.Exec(db, "CSV-Table-WorldCupMatches-Insert")
-
-			dot.Exec(db, "CSV-DROP-WorldCupPlayersCSV")
-			dot.Exec(db, "CSV-Table-WorldCupPlayersCSV")
-			dot.Exec(db, "CSV-Table-WorldCupPlayers-Insert")
-
-			dot.Exec(db, "CSV-DROP-WorldCupsCSV")
-			dot.Exec(db, "CSV-Table-WorldCupsCSV")
-			dot.Exec(db, "CSV-Table-WorldCupsCSV-Insert")
+			var wg sync.WaitGroup
+			wg.Add(1)
+			csvMatches(&wg, db, dot)
+			wg.Add(1)
+			csvPlayers(&wg, db, dot)
+			wg.Add(1)
+			csvWorldCups(&wg, db, dot)
+			wg.Wait()
 
 			dot.Exec(db, "prod-data-country")
 			dot.Exec(db, "prod-data-player")
 			dot.Exec(db, "prod-data-world-cup")
 			dot.Exec(db, "prod-data-match")
 			dot.Exec(db, "prod-data-player-in-match")
+
+			dot.Exec(db, "View-Country-Goal-Per-Match")
+			dot.Exec(db, "View-Country-Winning-Matches")
+
+			dot.Exec(db, "create-view-CountryGoalsScored")
+			dot.Exec(db, "create-view-CountryTotalAppearances")
+			dot.Exec(db, "create-view-CountryAvgData")
+
+			dot.Exec(db, "create-view-CountryGoalScorers")
+			dot.Exec(db, "create-view-CountryMostGoals")
+
+			dot.Exec(db, "create-view-WorldCupAttendances")
+
+			dot.Exec(db, "view-player-games-started")
+			dot.Exec(db, "view-games-played")
+
+			dot.Exec(db, "top-winning-countries-first-view")
+
+			dot.Exec(db, "top-winning-countries-first-view-podium")
+			dot.Exec(db, "top-winning-countries-second-view-podium")
+			dot.Exec(db, "top-winning-countries-third-view-podium")
 
 			initalizedDOT = dot
 		} else {
