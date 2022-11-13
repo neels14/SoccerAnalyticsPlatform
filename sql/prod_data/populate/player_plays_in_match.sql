@@ -1,3 +1,4 @@
+-- name: prod-data-player-in-match
 INSERT INTO PlayerPlaysInMatch
 SELECT DISTINCT Players.Player_Name AS player_name, Players.Shirt_Number AS shirt_number,
                 Country.name AS player_country, Matches.Year AS year,

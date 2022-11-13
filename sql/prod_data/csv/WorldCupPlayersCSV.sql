@@ -1,4 +1,6 @@
+-- name: CSV-DROP-WorldCupPlayersCSV
 DROP TABLE IF EXISTS WorldCupPlayersCSV;
+-- name: CSV-Table-WorldCupPlayersCSV
 CREATE TABLE IF NOT EXISTS WorldCupPlayersCSV(
    RoundID       INTEGER  NOT NULL
   ,MatchID       INTEGER  NOT NULL
@@ -10,7 +12,7 @@ CREATE TABLE IF NOT EXISTS WorldCupPlayersCSV(
   ,Position      VARCHAR(3)
   ,Event         VARCHAR(24)
 );
-
+-- name: CSV-Table-WorldCupPlayers-Insert
 INSERT INTO WorldCupPlayersCSV(RoundID,MatchID,Team_Initials,Coach_Name,Lineup,Shirt_Number,Player_Name,Position,Event) VALUES
  (201,1096,'FRA','CAUDRON Raoul (FRA)','S',0,'Alex THEPOT','GK',NULL)
 ,(201,1096,'MEX','LUQUE Juan (MEX)','S',0,'Oscar BONFIGLIO','GK',NULL)

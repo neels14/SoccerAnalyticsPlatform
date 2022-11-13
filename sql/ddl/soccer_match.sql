@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS SoccerMatch (
     city VARCHAR(64) NOT NULL,
     stadium VARCHAR(64) NOT NULL,
     attendance INT NOT NULL,
-#     home_coach VARCHAR(64) NOT NULL,
-#     away_coach VARCHAR(64) NOT NULL,
     PRIMARY KEY(year, stage, home_team_country, away_team_country),
     FOREIGN KEY (home_team_country) REFERENCES Country(name),
     FOREIGN KEY (away_team_country) REFERENCES Country(name)

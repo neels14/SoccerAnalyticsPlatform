@@ -18,7 +18,7 @@ func GetAllMatches(c *gin.Context) {
 	matches := []types.SoccerMatchResponse{}
 	for rows.Next() {
 		var match types.SoccerMatchResponse
-		err := rows.Scan(&match.Year, &match.Stage, &match.HomeTeam, &match.AwayTeam, &match.Date, &match.City, &match.Stadium, &match.Stadium, &match.HomeCoach, &match.AwayCoach)
+		err := rows.Scan(&match.Year, &match.Stage, &match.HomeTeam, &match.AwayTeam, &match.Date, &match.City, &match.Stadium, &match.Attendance)
 		if err != nil {
 			panic(err.Error()) // proper error handling instead of panic in your app
 		}

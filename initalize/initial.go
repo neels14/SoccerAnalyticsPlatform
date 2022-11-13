@@ -88,11 +88,63 @@ func GetInstance() *dotsql.DotSql {
 			if errAverageGoalScored != nil {
 				panic(errAverageGoalScored.Error())
 			}
-			dotPopulateTestData, errPopulateTestData := dotsql.LoadFromFile("./sql/test_data/populate_test_db.sql")
-			if errPopulateTestData != nil {
-				panic(errPopulateTestData.Error())
+
+			dotPopulateWorldCupMatches, errPopulateWorldCupMatches := dotsql.LoadFromFile("./sql/prod_data/csv/WorldCupMatchesCSV.sql")
+			if errPopulateWorldCupMatches != nil {
+				panic(errPopulateWorldCupMatches.Error())
 			}
-			dot := dotsql.Merge(dotDDLCountries, dotDDLPlayersInMatch, dotDDLPlayer, dotDDLSoccerMatch, dotDDLWorldCup, dotFeatureTopWinning, dotPopulateTestData, dotFeaturePodium, dotMostPopularWCAttendance, dotTopCountriesGoalScorer, dotAverageGoalScored, dotQueryCountry)
+
+			dotPopulateWorldCupPlayers, errPopulateWorldCupPlayers := dotsql.LoadFromFile("./sql/prod_data/csv/WorldCupPlayersCSV.sql")
+			if errPopulateWorldCupPlayers != nil {
+				panic(errPopulateWorldCupMatches.Error())
+			}
+
+			dotPopulateWorldCup, errPopulateWorldCup := dotsql.LoadFromFile("./sql/prod_data/csv/WorldCupsCSV.sql")
+			if errPopulateWorldCup != nil {
+				panic(errPopulateWorldCup.Error())
+			}
+
+			dotPopulateProdCountry, errPopulateProdCountry := dotsql.LoadFromFile("./sql/prod_data/populate/country.sql")
+			if errPopulateProdCountry != nil {
+				panic(errPopulateProdCountry.Error())
+			}
+			dotPopulateProdPlayerInMatch, errPopulateProdPlayerInMatch := dotsql.LoadFromFile("./sql/prod_data/populate/player_plays_in_match.sql")
+			if errPopulateProdPlayerInMatch != nil {
+				panic(errPopulateProdPlayerInMatch.Error())
+			}
+			dotPopulateProdPlayer, errPopulateProdPlayer := dotsql.LoadFromFile("./sql/prod_data/populate/player.sql")
+			if errPopulateProdPlayer != nil {
+				panic(errPopulateProdPlayer.Error())
+			}
+			dotPopulateMatch, errPopulateMatch := dotsql.LoadFromFile("./sql/prod_data/populate/soccer_match.sql")
+			if errPopulateMatch != nil {
+				panic(errPopulateMatch.Error())
+			}
+			dotPopulateWC, errPopulateWC := dotsql.LoadFromFile("./sql/prod_data/populate/world_cup.sql")
+			if errPopulateWC != nil {
+				panic(errPopulateWC.Error())
+			}
+			dot := dotsql.Merge(
+				dotPopulateProdPlayerInMatch,
+				dotPopulateProdPlayer,
+				dotPopulateWC,
+				dotPopulateMatch,
+				dotDDLCountries,
+				dotDDLPlayersInMatch,
+				dotDDLPlayer,
+				dotDDLSoccerMatch,
+				dotDDLWorldCup,
+				dotFeatureTopWinning,
+				dotPopulateProdCountry,
+				dotFeaturePodium,
+				dotMostPopularWCAttendance,
+				dotTopCountriesGoalScorer,
+				dotAverageGoalScored,
+				dotQueryCountry,
+				dotPopulateWorldCupMatches,
+				dotPopulateWorldCupPlayers,
+				dotPopulateWorldCup,
+			)
 			dot.Exec(db, "ddl-country-set-foreign-0")
 			dot.Exec(db, "ddl-country-drop-if-exists")
 			dot.Exec(db, "ddl-country-set-foreign-1")
@@ -129,11 +181,24 @@ func GetInstance() *dotsql.DotSql {
 			if errCreateWorldCup != nil {
 				panic(errCreateWorldCup.Error())
 			}
-			dot.Exec(db, "test-data-into-countries")
-			dot.Exec(db, "test-data-into-players")
-			dot.Exec(db, "test-data-into-world-cup")
-			dot.Exec(db, "test-data-into-match")
-			dot.Exec(db, "test-data-into-player-in-match")
+			dot.Exec(db, "CSV-DROP-WorldCupMatchesCSV")
+			dot.Exec(db, "CSV-Table-WorldCupMatches")
+			dot.Exec(db, "CSV-Table-WorldCupMatches-Insert")
+
+			dot.Exec(db, "CSV-DROP-WorldCupPlayersCSV")
+			dot.Exec(db, "CSV-Table-WorldCupPlayersCSV")
+			dot.Exec(db, "CSV-Table-WorldCupPlayers-Insert")
+
+			dot.Exec(db, "CSV-DROP-WorldCupsCSV")
+			dot.Exec(db, "CSV-Table-WorldCupsCSV")
+			dot.Exec(db, "CSV-Table-WorldCupsCSV-Insert")
+
+			dot.Exec(db, "prod-data-country")
+			dot.Exec(db, "prod-data-player")
+			dot.Exec(db, "prod-data-world-cup")
+			dot.Exec(db, "prod-data-match")
+			dot.Exec(db, "prod-data-player-in-match")
+
 			initalizedDOT = dot
 		} else {
 			fmt.Println("Single instance already created.")

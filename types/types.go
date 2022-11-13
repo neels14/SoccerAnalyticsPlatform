@@ -9,8 +9,6 @@ type SoccerMatchResponse struct {
 	City       string `json:"city"`
 	Stadium    string `json:"stadium"`
 	Attendance int    `json:"attendance"`
-	HomeCoach  string `json:"homeCoach"`
-	AwayCoach  string `json:"awayCoach"`
 }
 
 type CountryResponse struct {

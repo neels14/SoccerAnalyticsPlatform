@@ -1,4 +1,6 @@
+-- name: CSV-DROP-WorldCupMatchesCSV
 DROP TABLE IF EXISTS WorldCupMatchesCSV;
+-- name: CSV-Table-WorldCupMatches
 CREATE TABLE IF NOT EXISTS WorldCupMatchesCSV(
    Year                INTEGER NOT NULL
   ,Datetime            VARCHAR(21)
@@ -21,7 +23,7 @@ CREATE TABLE IF NOT EXISTS WorldCupMatchesCSV(
   ,Home_Team_Initials  VARCHAR(3)
   ,Away_Team_Initials  VARCHAR(3)
 );
-
+-- name: CSV-Table-WorldCupMatches-Insert
 INSERT INTO WorldCupMatchesCSV(Year,Datetime,Stage,Stadium,City,Home_Team_Name,Home_Team_Goals,Away_Team_Goals,Away_Team_Name,Win_conditions,Attendance,Halftime_Home_Goals,Halftime_Away_Goals,Referee,Assistant_1,Assistant_2,RoundID,MatchID,Home_Team_Initials,Away_Team_Initials) VALUES
  (1930,'13 Jul 1930 - 15:00','Group 1','Pocitos','Montevideo','France',4,1,'Mexico',NULL,4444,3,0,'LOMBARDI Domingo (URU)','CRISTOPHE Henry (BEL)','REGO Gilberto (BRA)',201,1096,'FRA','MEX')
 ,(1930,'13 Jul 1930 - 15:00','Group 4','Parque Central','Montevideo','USA',3,0,'Belgium',NULL,18346,2,0,'MACIAS Jose (ARG)','MATEUCCI Francisco (URU)','WARNKEN Alberto (CHI)',201,1090,'USA','BEL')
