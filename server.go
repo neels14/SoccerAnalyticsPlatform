@@ -16,7 +16,6 @@ func main() {
 		country := v1.Group("/country")
 		{
 			country.GET("/", routes.GetAllCountries)
-			country.GET("/:name", routes.GetCountry)
 			country.GET("/averageGoal", routes.AverageGoalByCountry)
 			country.GET("/averageGoal/:name", routes.AverageGoalForCountry)
 		}
@@ -34,6 +33,11 @@ func main() {
 		world_cup := v1.Group("/worldCup")
 		{
 			world_cup.GET("/", routes.GetAllWorldCups)
+			world_cup.GET("/popular", routes.MostPopular)
+			world_cup.GET("/first", routes.First)
+			world_cup.GET("/first/:country", routes.FirstWithName)
+			world_cup.GET("/podium", routes.Podium)
+			world_cup.GET("/podium/:country", routes.PodiumWithCountry)
 		}
 
 	}

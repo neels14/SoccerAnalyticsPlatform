@@ -28,11 +28,6 @@ func GetAllCountries(c *gin.Context) {
 	c.JSON(200, countries)
 }
 
-func GetCountry(c *gin.Context) {
-	name := c.Param("name")
-	c.JSON(200, name)
-}
-
 func AverageGoalByCountry(c *gin.Context) {
 	dot := initalize.GetInstance()
 	rows, errAllCountries := dot.Query(initalize.GetDB(), "create-table-AvgGoalsInMatchByCountry-without-country")

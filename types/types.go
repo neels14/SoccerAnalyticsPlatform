@@ -54,3 +54,13 @@ type TopScorer struct {
 	TopScorer string `json:"topScorer"`
 	Goals     int    `json:"goals"`
 }
+
+type WorldCupAttendence struct {
+	Year       int `json:"year"`
+	Attendance int `json:"attendance"`
+}
+
+type Winner struct {
+	Country string `json:"country_name"`
+	Wins    int    `json:"total_win"`
+}
