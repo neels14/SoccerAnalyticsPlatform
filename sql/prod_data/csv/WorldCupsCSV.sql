@@ -1,4 +1,6 @@
+-- name: CSV-DROP-WorldCupsCSV
 DROP TABLE IF EXISTS WorldCupsCSV;
+-- name: CSV-Table-WorldCupsCSV
 CREATE TABLE IF NOT EXISTS WorldCupsCSV(
    Year           INTEGER  NOT NULL
   ,Country        VARCHAR(12) NOT NULL
@@ -11,7 +13,7 @@ CREATE TABLE IF NOT EXISTS WorldCupsCSV(
   ,MatchesPlayed  INTEGER  NOT NULL
   ,Attendance     VARCHAR(9) NOT NULL
 );
-
+-- name: CSV-Table-WorldCupsCSV-Insert
 INSERT INTO WorldCupsCSV(Year,Country,Winner,RunnersUp,Third,Fourth,GoalsScored,QualifiedTeams,MatchesPlayed,Attendance) VALUES
  (1930,'Uruguay','Uruguay','Argentina','USA','Yugoslavia',70,13,18,'590.549')
 ,(1934,'Italy','Italy','Czechoslovakia','Germany','Austria',70,16,17,'363.000')

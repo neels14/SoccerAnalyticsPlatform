@@ -1,3 +1,4 @@
+-- name: prod-data-country
 INSERT INTO Country
 SELECT DISTINCT * FROM
 (SELECT Home_Team_Name AS name, Home_Team_Initials AS team_initials FROM WorldCupMatchesCSV
