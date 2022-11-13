@@ -17,12 +17,23 @@ func main() {
 		{
 			country.GET("/", routes.GetAllCountries)
 			country.GET("/:name", routes.GetCountry)
+			country.GET("/averageGoal", routes.AverageGoalByCountry)
+			country.GET("/averageGoal/:name", routes.AverageGoalForCountry)
 		}
 
 		matches := v1.Group("/matches")
 		{
 			matches.GET("/", routes.GetAllMatches)
-			matches.GET("/:year", routes.GetMatchByYear)
+		}
+		players := v1.Group("/players")
+		{
+			players.GET("/", routes.GetAllPlayer)
+			players.GET("/topScorer", routes.GetTopScorers)
+			players.GET("/topScorer/:country", routes.GetTopScorersWithCountry)
+		}
+		world_cup := v1.Group("/worldCup")
+		{
+			world_cup.GET("/", routes.GetAllWorldCups)
 		}
 
 	}

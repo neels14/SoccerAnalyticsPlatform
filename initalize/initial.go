@@ -44,7 +44,7 @@ func GetInstance() *dotsql.DotSql {
 			fmt.Println("Creating DOT now.")
 			db := GetDB()
 			//Loads queries from file
-			dotQueryCountry, errQueryCountry := dotsql.LoadFromFile("./sql/queries/countryQuery.sql")
+			dotQueryCountry, errQueryCountry := dotsql.LoadFromFile("./sql/queries/generalQueries.sql")
 			if errQueryCountry != nil {
 				panic(errQueryCountry.Error())
 			}

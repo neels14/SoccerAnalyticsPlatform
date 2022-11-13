@@ -1,19 +1,16 @@
 package types
 
-import "time"
-
 type SoccerMatchResponse struct {
-	StatusCode int       `json:"code"`
-	Year       int       `json:"year"`
-	Stage      string    `json:"stage"`
-	HomeTeam   string    `json:"home"`
-	AwayTeam   string    `json:"away"`
-	Date       time.Time `json:"time"`
-	City       string    `json:"city"`
-	Stadium    string    `json:"stadium"`
-	Attendance int       `json:"attendance"`
-	HomeCoach  string    `json:"homeCoach"`
-	AwayCoach  string    `json:"awayCoach"`
+	Year       int    `json:"year"`
+	Stage      string `json:"stage"`
+	HomeTeam   string `json:"home"`
+	AwayTeam   string `json:"away"`
+	Date       string `json:"date"`
+	City       string `json:"city"`
+	Stadium    string `json:"stadium"`
+	Attendance int    `json:"attendance"`
+	HomeCoach  string `json:"homeCoach"`
+	AwayCoach  string `json:"awayCoach"`
 }
 
 type CountryResponse struct {
@@ -45,4 +42,15 @@ type PlayerInMatch struct {
 	AwayTeam    string `json:"away"`
 	Starter     bool   `json:"isStarter"`
 	GoalsScored int    `json:"goalsScored"`
+}
+
+type AverageGoalByCountry struct {
+	Name        string  `json:"countryName"`
+	AverageGoal float32 `json:"averageGoal"`
+}
+
+type TopScorer struct {
+	Name      string `json:"countryName"`
+	TopScorer string `json:"topScorer"`
+	Goals     int    `json:"goals"`
 }
