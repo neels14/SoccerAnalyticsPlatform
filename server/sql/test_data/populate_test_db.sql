@@ -51,4 +51,7 @@ VALUES
     ('Messi', 7, 'Argentina', 2004, 'Group C', 'Argentina', 'Brazil', TRUE, 2),
     ('Neymar', 1, 'Brazil', 2004, 'Group C', 'Argentina', 'Brazil', TRUE, 1),
     ('Romero', 8, 'Argentina', 2004, 'Group C', 'Argentina', 'Brazil', TRUE, 2),
-    ('Hamza', 3, 'Brazil', 2004, 'Group C', 'Argentina', 'Brazil', FALSE, 4);
+    ('Hamza', 3, 'Brazil', 2004, 'Group C', 'Argentina', 'Brazil', FALSE, 4),
+    ('Aashrit', 24, 'Canada', 2004, 'Group A', 'Canada', 'United States of America', TRUE, 5),
+    ('Jacob', 17, 'United States of America', 2004, 'Group A', 'Canada', 'United States of America', TRUE, 1);
+

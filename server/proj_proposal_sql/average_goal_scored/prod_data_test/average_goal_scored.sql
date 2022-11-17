@@ -26,13 +26,8 @@ SELECT
 FROM CountryGoalsScored RIGHT OUTER JOIN CountryTotalAppearances
 ON CountryGoalsScored.country_name = CountryTotalAppearances.country_name;
 
--- specific country query
-SELECT country_name, goals_scored/matches_played AS avg_goals_match
-FROM CountryAvgData
-WHERE country_name = "Argentina"
-ORDER BY avg_goals_match DESC, country_name;
-
 -- All countries query
 SELECT country_name, goals_scored/matches_played AS avg_goals_match
 FROM CountryAvgData
-ORDER BY avg_goals_match DESC, country_name;
+ORDER BY avg_goals_match DESC, country_name
+LIMIT 10;

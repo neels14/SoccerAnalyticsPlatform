@@ -1,0 +1,22 @@
+| country\_name | total\_wins |
+| :--- | :--- |
+| Brazil | 7 |
+| Italy | 7 |
+| Argentina | 5 |
+| Germany | 4 |
+| Germany FR | 4 |
+| Netherlands | 4 |
+| France | 3 |
+| Sweden | 3 |
+| Czechoslovakia | 2 |
+| Hungary | 2 |
+| Poland | 2 |
+| Uruguay | 2 |
+| Austria | 1 |
+| Chile | 1 |
+| Croatia | 1 |
+| England | 1 |
+| Portugal | 1 |
+| Spain | 1 |
+| Turkey | 1 |
+| USA | 1 |
