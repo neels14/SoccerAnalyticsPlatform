@@ -15,8 +15,8 @@ Soccer Analytics Platform which provides users with a web interface to extract i
 
 Note: you must have Docker Desktop setup on your local machine in order to run the second step. If not, download it from the Docker website.
 
-3. In another terminal window, ```cd``` into the `server` subdirectory again and run command: ```go run main.go```.
-This will start the backend server, which begins by connecting to the MySQL database which you ran via docker, creates the necessary tables defined in our database schema, and then populates them with the sample test data.
+3. In another terminal window, ```cd``` into the `server` subdirectory again and run command: ```go run server.go```.
+This will start the backend server, which begins by connecting to the MySQL database which you ran via docker, creates the necessary tables defined in our database schema, and then populates them with the production data.
 
 ## Frontend Setup
 
