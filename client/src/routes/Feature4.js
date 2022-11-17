@@ -18,7 +18,7 @@ function Feature4() {
             .then(respose => respose.json())
             .then(json => {if (country) {setAvgGoals([json])} else {setAvgGoals(json)}})
   }, [country])
-  
+
   return (
     <>
       <Typography sx={{m: 2}} variant="h5"><b>Feature 4:</b> Average Goals Scored Per Match</Typography>
