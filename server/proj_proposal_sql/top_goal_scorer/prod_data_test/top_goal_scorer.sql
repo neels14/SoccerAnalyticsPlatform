@@ -12,10 +12,5 @@ GROUP BY goal_scorer_country;
 
 SELECT top_scorer_country, goal_scorer_name, top_scorer_goals
 FROM CountryGoalScorers, CountryMostGoals
-WHERE top_scorer_country = goal_scorer_country AND top_scorer_goals = goal_scorer_goals AND top_scorer_country = "Argentina"
-ORDER BY top_scorer_goals DESC, top_scorer_country, goal_scorer_name;
-
-SELECT top_scorer_country, goal_scorer_name, top_scorer_goals
-FROM CountryGoalScorers, CountryMostGoals
-WHERE top_scorer_country = goal_scorer_country AND top_scorer_goals = goal_scorer_goals
+WHERE top_scorer_country = goal_scorer_country AND top_scorer_goals = goal_scorer_goals AND top_scorer_country = 'Argentina'
 ORDER BY top_scorer_goals DESC, top_scorer_country, goal_scorer_name;
