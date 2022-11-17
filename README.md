@@ -18,6 +18,12 @@ Note: you must have Docker Desktop setup on your local machine in order to run t
 3. In another terminal window, ```cd``` into the `server` subdirectory again and run command: ```go run server.go```.
 This will start the backend server, which begins by connecting to the MySQL database which you ran via docker, creates the necessary tables defined in our database schema, and then populates them with the production data.
 
+As mentioned, the production database will be automatically populated upon the server starting. However, if you'd like to manually populate the database with production data, you can follow these two steps:
+
+1. Create the Raw CSV Corresponding Tables by Running Queries Located [Here](server/sql/prod_data/csv)
+
+2. Populate the Production Database by Running Queries Located [Here](server/sql/prod_data/populate)
+
 ## Frontend Setup
 
 Ensure you have npm/Node.js installed before continuing.
