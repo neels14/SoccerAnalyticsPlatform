@@ -94,3 +94,25 @@ func GetMostStarted(c *gin.Context) {
 
 	c.JSON(200, players)
 }
+
+func GetMostStartedWithCountry(c *gin.Context) {
+    country := c.Param("country")
+	dot := initalize.GetInstance()
+	rows, errAllPlayer := dot.Query(initalize.GetDB(), "player-most-started-specific-country", country)
+	if errAllPlayer != nil {
+		panic(errAllPlayer.Error())
+	}
+	defer rows.Close()
+	players := []types.PlayerMostStarted{}
+	for rows.Next() {
+		var player types.PlayerMostStarted
+		err := rows.Scan(&player.Name, &player.ShirtNumber, &player.Country, &player.StartRatio)
+		if err != nil {
+			panic(err.Error()) // proper error handling instead of panic in your app
+		}
+		players = append(players, player)
+
+	}
+
+	c.JSON(200, players)
+}
