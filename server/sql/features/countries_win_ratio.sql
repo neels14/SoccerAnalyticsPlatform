@@ -1,3 +1,4 @@
+-- Countries win ratio
 -- name: View-Country-Goal-Per-Match
 CREATE OR REPLACE VIEW CountryGoalsPerMatch AS
 SELECT year, stage, home_team_country, away_team_country, player_country, SUM(goals_scored) AS match_goals FROM PlayerPlaysInMatch
@@ -18,4 +19,9 @@ GROUP BY 1;
 -- name: Country-Win-Ratio
 SELECT CountryWinningMatches.country AS country, CountryWinningMatches.num_wins / CountryTotalAppearances.num_matches * 100 AS win_ratio
 FROM CountryWinningMatches, CountryTotalAppearances
-WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name
+WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name;
+
+-- name: Country-Win-Ratio-specific-country
+SELECT CountryWinningMatches.country AS country, CountryWinningMatches.num_wins / CountryTotalAppearances.num_matches * 100 AS win_ratio
+FROM CountryWinningMatches, CountryTotalAppearances
+WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name AND CountryWinningMatches.country = ?;
