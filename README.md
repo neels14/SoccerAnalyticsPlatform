@@ -18,17 +18,17 @@ Note: you must have Docker Desktop setup on your local machine in order to run t
 3. In another terminal window, ```cd``` into the `server` subdirectory again and run command: ```go run main.go```.
 This will start the backend server, which begins by connecting to the MySQL database which you ran via docker, creates the necessary tables defined in our database schema, and then populates them with the sample test data.
 
-### Frontend Setup
+## Frontend Setup
 
 Ensure you have npm/Node.js installed before continuing.
 
-#### Running the app in development mode
+### Running the app in development mode
 
 1. ```cd``` into the `client` subdirectory.
 
 2. Run ```npm start```. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-#### Building the app for production
+### Building the app for production
 
 1. ```cd``` into the `client` subdirectory.
 
