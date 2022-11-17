@@ -29,8 +29,8 @@ function Feature6() {
           <Table sx={{ minWidth: 650 }}>
               <TableHead>
                   <StyledTableRow>
-                      <StyledTableCell>Country</StyledTableCell>
-                      <StyledTableCell align="right">Player</StyledTableCell>
+                      <StyledTableCell>Player</StyledTableCell>
+                      <StyledTableCell align="right">Country</StyledTableCell>
                       <StyledTableCell align="right">Shirt Number</StyledTableCell>
                       <StyledTableCell align="right">Start Ratio</StyledTableCell>
                   </StyledTableRow>
@@ -38,8 +38,8 @@ function Feature6() {
               <TableBody>
                   {mostStartedPlayers.map((mostStartedPlayer, index) => (
                       <StyledTableRow key={index}>
-                          <StyledTableCell>{mostStartedPlayer.country}</StyledTableCell>
-                          <StyledTableCell align="right">{mostStartedPlayer.playerName}</StyledTableCell>
+                          <StyledTableCell>{mostStartedPlayer.playerName}</StyledTableCell>
+                          <StyledTableCell align="right">{mostStartedPlayer.country}</StyledTableCell>
                           <StyledTableCell align="right">{mostStartedPlayer.shirtNumber}</StyledTableCell>
                           <StyledTableCell align="right">{mostStartedPlayer.startRatio.toFixed(2)}</StyledTableCell>
                       </StyledTableRow>
