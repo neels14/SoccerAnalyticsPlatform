@@ -23,7 +23,8 @@ SELECT country_name, SUM(num_wins) AS total_wins FROM (
     SELECT * FROM ThirdPlaceWinners) AS podium_winners
 WHERE country_name = ?
 GROUP BY country_name
-ORDER BY total_wins DESC, country_name;
+ORDER BY total_wins DESC, country_name
+LIMIT ? OFFSET ?;
 
 -- name: top-winning-countries-podium
 SELECT country_name, SUM(num_wins) AS total_wins FROM (
@@ -33,6 +34,26 @@ SELECT country_name, SUM(num_wins) AS total_wins FROM (
     UNION
     SELECT * FROM ThirdPlaceWinners) AS podium_winners
 GROUP BY country_name
-ORDER BY total_wins DESC, country_name;
+ORDER BY total_wins DESC, country_name
+LIMIT ? OFFSET ?;
+
+-- name: count-top-winning-countries-podium-with-country-name
+SELECT COUNT(*) FROM (
+    SELECT * FROM FirstPlaceWinners
+    UNION
+    SELECT * FROM SecondPlaceWinners
+    UNION
+    SELECT * FROM ThirdPlaceWinners) AS podium_winners
+WHERE country_name = ?
+GROUP BY country_name
+
+-- name: count-top-winning-countries-podium
+SELECT COUNT(*) FROM (
+    SELECT * FROM FirstPlaceWinners
+    UNION
+    SELECT * FROM SecondPlaceWinners
+    UNION
+    SELECT * FROM ThirdPlaceWinners) AS podium_winners
+GROUP BY country_name;
 
 

@@ -32,10 +32,21 @@ ON CountryGoalsScored.country_name = CountryTotalAppearances.country_name;
 SELECT country_name, goals_scored/matches_played AS avg_goals_match
 FROM CountryAvgData
 WHERE country_name = ?
-ORDER BY avg_goals_match DESC, country_name;
+ORDER BY avg_goals_match DESC, country_name
+LIMIT ? OFFSET ?;
+
+-- name: count-create-table-AvgGoalsInMatchByCountry
+SELECT COUNT(*)
+FROM CountryAvgData
+WHERE country_name = ?;
 
 -- name: create-table-AvgGoalsInMatchByCountry-without-country
 SELECT country_name, goals_scored/matches_played AS avg_goals_match
 FROM CountryAvgData
-ORDER BY avg_goals_match DESC, country_name;
+ORDER BY avg_goals_match DESC, country_name
+LIMIT ? OFFSET ?;
+
+-- name: count-create-table-AvgGoalsInMatchByCountry-without-country
+SELECT COUNT(*)
+FROM CountryAvgData;
 

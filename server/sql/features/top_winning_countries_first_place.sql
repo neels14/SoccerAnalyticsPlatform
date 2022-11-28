@@ -6,6 +6,14 @@ GROUP BY country_name
 ORDER BY total_wins DESC, country_name;
 -- name: top-winning-countries-first
 SELECT * FROM FirstPlaceWinners
-WHERE country_name = ?;
+WHERE country_name = ?
+LIMIT ? OFFSET ?;
 -- name: top-winning-countries-first-without-name
-SELECT * FROM FirstPlaceWinners;
+SELECT * FROM FirstPlaceWinners
+LIMIT ? OFFSET ?;
+
+-- name: count-top-winning-countries-first
+SELECT COUNT(*) FROM FirstPlaceWinners
+WHERE country_name = ?;
+-- name: count-top-winning-countries-first-without-name
+SELECT COUNT(*) FROM FirstPlaceWinners;
