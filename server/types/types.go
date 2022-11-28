@@ -74,3 +74,22 @@ type WinRatio struct {
 	Country  string  `json:"country"`
 	WinRatio float64 `json:"winRatio"`
 }
+
+type User struct {
+	Username  string `json:"username"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
+}
+
+type UserValid struct {
+	Valid bool `json:"valid"`
+}
+
+type NewUser struct {
+	Username  string `json:"username"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+}
