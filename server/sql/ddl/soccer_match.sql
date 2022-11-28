@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS SoccerMatch (
     attendance INT NOT NULL,
     PRIMARY KEY(year, stage, home_team_country, away_team_country),
     FOREIGN KEY (home_team_country) REFERENCES Country(name),
-    FOREIGN KEY (away_team_country) REFERENCES Country(name)
-
+    FOREIGN KEY (away_team_country) REFERENCES Country(name),
+    INDEX home_team_idx(home_team_country),
+    INDEX away_team_idx(away_team_country),
+    INDEX year_attendance(year, attendance)
 ) ENGINE=INNODB;
