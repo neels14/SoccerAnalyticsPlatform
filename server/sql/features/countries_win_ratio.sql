@@ -19,9 +19,23 @@ GROUP BY 1;
 -- name: Country-Win-Ratio
 SELECT CountryWinningMatches.country AS country, CountryWinningMatches.num_wins / CountryTotalAppearances.num_matches * 100 AS win_ratio
 FROM CountryWinningMatches, CountryTotalAppearances
-WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name;
+WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name
+LIMIT ? OFFSET ?;
+
+-- name: Count-Country-Win-Ratio
+SELECT COUNT(*)
+FROM CountryWinningMatches, CountryTotalAppearances
+WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name
+
 
 -- name: Country-Win-Ratio-specific-country
 SELECT CountryWinningMatches.country AS country, CountryWinningMatches.num_wins / CountryTotalAppearances.num_matches * 100 AS win_ratio
 FROM CountryWinningMatches, CountryTotalAppearances
-WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name AND CountryWinningMatches.country = ?;
+WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name AND CountryWinningMatches.country = ?
+LIMIT ? OFFSET ?;
+
+
+-- name: Count-Country-Win-Ratio-specific-country
+SELECT COUNT(*)
+FROM CountryWinningMatches, CountryTotalAppearances
+WHERE CountryWinningMatches.country = CountryTotalAppearances.country_name AND CountryWinningMatches.country = ?

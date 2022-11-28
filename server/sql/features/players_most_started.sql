@@ -21,7 +21,8 @@ FROM
 WHERE p1.player_name = p2.player_name AND
         p1.shirt_number = p2.shirt_number AND
         p1.player_country = p2.player_country
-ORDER BY 4 DESC, 1,2,3;
+ORDER BY 4 DESC, 1,2,3
+LIMIT ? OFFSET ?;
 
 -- name: player-most-started-specific-country
 SELECT p1.player_name, p1.shirt_number, p1.player_country, p1.num_starts / p2.num_games_played * 100 AS start_ratio
@@ -31,4 +32,22 @@ WHERE p1.player_name = p2.player_name AND
         p1.shirt_number = p2.shirt_number AND
         p1.player_country = p2.player_country AND
         p1.player_country = ?
-ORDER BY 4 DESC, 1,2,3;
+ORDER BY 4 DESC, 1,2,3
+LIMIT ? OFFSET ?;
+
+-- name: count-player-most-started
+SELECT COUNT(*)
+FROM
+    PlayerGamesStarted AS p1, PlayerGamesPlayed AS p2
+WHERE p1.player_name = p2.player_name AND
+        p1.shirt_number = p2.shirt_number AND
+        p1.player_country = p2.player_country
+
+-- name: count-player-most-started-specific-country
+SELECT COUNT(*)
+FROM
+    PlayerGamesStarted AS p1, PlayerGamesPlayed AS p2
+WHERE p1.player_name = p2.player_name AND
+        p1.shirt_number = p2.shirt_number AND
+        p1.player_country = p2.player_country AND
+        p1.player_country = ?

@@ -10,5 +10,12 @@ SELECT year, SUM(attendance) as year_attendance
 SELECT * 
 FROM WorldCupAttendances
 WHERE year_attendance >= ALL(SELECT year_attendance FROM WorldCupAttendances)
-ORDER BY  year_attendance;
+ORDER BY  year_attendance
+LIMIT ? OFFSET ?;
+
+-- name: count-create-table-MostPopularWCByAttendance
+SELECT COUNT(*) 
+FROM WorldCupAttendances
+WHERE year_attendance >= ALL(SELECT year_attendance FROM WorldCupAttendances)
+ORDER BY  year_attendance
 
