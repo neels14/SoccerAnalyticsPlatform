@@ -14,5 +14,8 @@ CREATE TABLE IF NOT EXISTS WorldCup (
     FOREIGN KEY (host_country) REFERENCES Country(name),
     FOREIGN KEY (first_place_country) REFERENCES Country(name),
     FOREIGN KEY (second_place_country) REFERENCES Country(name),
-    FOREIGN KEY (third_place_country) REFERENCES Country(name)
+    FOREIGN KEY (third_place_country) REFERENCES Country(name),
+    INDEX first_place_idx(first_place_country),
+    INDEX second_place_idx(second_place_country),
+    INDEX third_place_idx(third_place_country)
 ) ENGINE=INNODB;

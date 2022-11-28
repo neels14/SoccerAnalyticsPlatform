@@ -17,5 +17,7 @@ CREATE TABLE IF NOT EXISTS PlayerPlaysInMatch (
     goals_scored INT NOT NULL,
     PRIMARY KEY(player_name, shirt_number, player_country, year, stage, home_team_country, away_team_country),
     FOREIGN KEY(player_name, shirt_number, player_country) REFERENCES Player(name, shirt_number, country),
-    FOREIGN KEY(year, stage, home_team_country, away_team_country) REFERENCES SoccerMatch(year, stage, home_team_country, away_team_country)
+    FOREIGN KEY(year, stage, home_team_country, away_team_country) REFERENCES SoccerMatch(year, stage, home_team_country, away_team_country),
+    INDEX PlayerPlaysInMatch_Idx(player_country, goals_scored, player_name),
+    INDEX PlayerPlaysInMatch_IsStarter(is_starter)
 ) ENGINE=INNODB;
