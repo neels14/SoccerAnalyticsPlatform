@@ -81,11 +81,11 @@ func GetInstance() *dotsql.DotSql {
 			}
 			dotDDLPlayersInMatch, errDDLPlayersInMatch := dotsql.LoadFromFile("./sql/ddl/player_plays_in_match.sql")
 			if errDDLPlayersInMatch != nil {
-				panic(errDDLCountries.Error())
+				panic(errDDLPlayersInMatch.Error())
 			}
 			dotDDLPlayer, errDDLPlayer := dotsql.LoadFromFile("./sql/ddl/player.sql")
 			if errDDLPlayer != nil {
-				panic(errDDLCountries.Error())
+				panic(errDDLPlayer.Error())
 			}
 			dotDDLSoccerMatch, errDDLSoccerMatch := dotsql.LoadFromFile("./sql/ddl/soccer_match.sql")
 			if errDDLSoccerMatch != nil {
@@ -161,6 +161,17 @@ func GetInstance() *dotsql.DotSql {
 			if errPlayerMostStarted != nil {
 				panic(errPlayerMostStarted.Error())
 			}
+
+			dotDDLUser, errDDLUser := dotsql.LoadFromFile("./sql/ddl/user.sql")
+			if errDDLUser != nil {
+				panic(errDDLUser.Error())
+			}
+
+			dotUserQueries, errUserQueries := dotsql.LoadFromFile("./sql/queries/userQueries.sql")
+			if errUserQueries != nil {
+				panic(errUserQueries.Error())
+			}
+
 			println("Merging")
 			dot := dotsql.Merge(
 				dotPlayerMostStarted,
@@ -184,8 +195,11 @@ func GetInstance() *dotsql.DotSql {
 				dotPopulateWorldCupPlayers,
 				dotPopulateWorldCup,
 				dotWinRatio,
+				dotDDLUser,
+				dotUserQueries,
 			)
 			println("Done Loading")
+
 			dot.Exec(db, "ddl-country-set-foreign-0")
 			dot.Exec(db, "ddl-country-drop-if-exists")
 			dot.Exec(db, "ddl-country-set-foreign-1")
@@ -193,13 +207,23 @@ func GetInstance() *dotsql.DotSql {
 			if errCreateCountries != nil {
 				panic(errCreateCountries.Error())
 			}
+
 			dot.Exec(db, "ddl-player-set-foreign-0")
 			dot.Exec(db, "ddl-player-drop-if-exists")
-			dot.Exec(db, "ddl-player-play-create-table")
+			dot.Exec(db, "ddl-player-set-foreign-1")
 			_, errCreatePlayer := dot.Exec(db, "ddl-player-create-player")
 			if errCreatePlayer != nil {
 				panic(errCreatePlayer.Error())
 			}
+
+			dot.Exec(db, "ddl-world-cup-set-foreign-0")
+			dot.Exec(db, "ddl-world-cup-drop-if-exists")
+			dot.Exec(db, "ddl-world-cup-set-foreign-1")
+			_, errCreateWorldCup := dot.Exec(db, "ddl-world-cup-create-table")
+			if errCreateWorldCup != nil {
+				panic(errCreateWorldCup.Error())
+			}
+
 			dot.Exec(db, "ddl-match-set-foreign-0")
 			dot.Exec(db, "ddl-match-drop-if-exists")
 			dot.Exec(db, "ddl-match-set-foreign-1")
@@ -207,21 +231,23 @@ func GetInstance() *dotsql.DotSql {
 			if errCreateMatches != nil {
 				panic(errCreateMatches.Error())
 			}
+
 			dot.Exec(db, "ddl-player-play-set-foreign-0")
-			dot.Exec(db, "ddl-player-play-drop-table-if-exists")
-			dot.Exec(db, "ddl-player-play-create-table")
+			dot.Exec(db, "ddl-player-drop-table-if-exists")
+			dot.Exec(db, "ddl-player-play-set-foreign-1")
 			_, errCreatePlayerPlay := dot.Exec(db, "ddl-player-play-create-table")
 			if errCreatePlayerPlay != nil {
 				panic(errCreatePlayerPlay.Error())
 			}
 
-			dot.Exec(db, "ddl-world-cup-set-foreign-0")
-			dot.Exec(db, "ddl-world-cup-drop-if-exists")
-			dot.Exec(db, "ddl-world-cup-create-table")
-			_, errCreateWorldCup := dot.Exec(db, "ddl-world-cup-create-table")
-			if errCreateWorldCup != nil {
-				panic(errCreateWorldCup.Error())
+			dot.Exec(db, "ddl-user-set-foreign-0")
+			dot.Exec(db, "ddl-user-drop-if-exists")
+			dot.Exec(db, "ddl-user-set-foreign-1")
+			_, errCreateUser := dot.Exec(db, "ddl-user-create-user")
+			if errCreateUser != nil {
+				panic(errCreateUser.Error())
 			}
+
 			var wg sync.WaitGroup
 			wg.Add(1)
 			csvMatches(&wg, db, dot)

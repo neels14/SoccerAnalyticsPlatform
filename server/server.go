@@ -43,6 +43,12 @@ func main() {
 			world_cup.GET("/podium", routes.Podium)
 			world_cup.GET("/podium/:country", routes.PodiumWithCountry)
 		}
+		user := v1.Group("/user")
+		{
+			user.GET("/:username", routes.GetUserByUsername)
+			user.GET("/:username/:password", routes.VerifyUser)
+			user.POST("/", routes.AddUser)
+		}
 	}
 	r.Run()
 	initalize.GetDB().Close()
