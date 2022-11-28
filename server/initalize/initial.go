@@ -240,8 +240,6 @@ func GetInstance() *dotsql.DotSql {
 				panic(errCreatePlayerPlay.Error())
 			}
 
-			dot.Exec(db, "ddl-user-set-foreign-0")
-			dot.Exec(db, "ddl-user-drop-if-exists")
 			dot.Exec(db, "ddl-user-set-foreign-1")
 			_, errCreateUser := dot.Exec(db, "ddl-user-create-user")
 			if errCreateUser != nil {
