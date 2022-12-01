@@ -16,7 +16,7 @@ function Feature6() {
   useEffect(() => {
       fetch(`/api/v1/players/mostStarted/${country}`)
           .then(respose => respose.json())
-          .then(json => setMostStartedPlayers(json))
+          .then(json => setMostStartedPlayers(json.data))
   }, [country])
 
   return (

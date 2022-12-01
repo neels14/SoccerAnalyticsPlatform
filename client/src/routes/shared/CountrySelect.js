@@ -8,9 +8,9 @@ function CountrySelect({...props}) {
     const [countries, setCountries] = useState([])
 
     useEffect(() => {
-        fetch("/api/v1/country/")
+        fetch("/api/v1/country/?limit=82")
             .then(respose => respose.json())
-            .then(json => setCountries(json.map(json => json.name)))
+            .then(json => setCountries(json.data.map(json => json.name)))
     }, [])
 
     return (
