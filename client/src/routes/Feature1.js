@@ -19,7 +19,7 @@ function Feature1() {
   useEffect(() => {
     fetch(`/api/v1/worldCup/${firstOrPodium}/${country}`)
         .then(respose => respose.json())
-        .then(json => setTotalWins(json))
+        .then(json => setTotalWins(json.data))
   }, [firstOrPodium, country])
 
   return (

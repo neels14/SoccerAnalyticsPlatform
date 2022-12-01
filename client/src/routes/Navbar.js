@@ -111,7 +111,6 @@ function FeaturesMenu() {
           role={undefined}
           placement="bottom-start"
           transition
-          disablePortal
         >
           {({ TransitionProps, placement }) => (
             <Grow

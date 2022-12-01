@@ -9,8 +9,8 @@ function Feature2() {
     fetch("/api/v1/worldCup/popular")
         .then(respose => respose.json())
         .then(json => {
-          setMostPopularYear(json[0].year)
-          setAttendance(json[0].attendance)
+          setMostPopularYear(json.data[0].year)
+          setAttendance(json.data[0].attendance)
         })
   }, [])
 
