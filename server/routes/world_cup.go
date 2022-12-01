@@ -162,7 +162,7 @@ func FirstWithName(c *gin.Context) {
 		wcs = append(wcs, wc)
 
 	}
-	rows, errCountryCount := dot.Query(initalize.GetDB(), "count-top-winning-countries-first")
+	rows, errCountryCount := dot.Query(initalize.GetDB(), "count-top-winning-countries-first", country)
 	if errCountryCount != nil {
 		panic(errCountryCount.Error())
 	}
@@ -247,7 +247,7 @@ func PodiumWithCountry(c *gin.Context) {
 		wcs = append(wcs, wc)
 
 	}
-	rows, errCountryCount := dot.Query(initalize.GetDB(), "count-top-winning-countries-podium-with-country-name")
+	rows, errCountryCount := dot.Query(initalize.GetDB(), "count-top-winning-countries-podium-with-country-name", country)
 	if errCountryCount != nil {
 		panic(errCountryCount.Error())
 	}

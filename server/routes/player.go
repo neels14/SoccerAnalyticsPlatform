@@ -207,7 +207,7 @@ func GetMostStartedWithCountry(c *gin.Context) {
 		players = append(players, player)
 
 	}
-	rows, errCountryCount := dot.Query(initalize.GetDB(), "count-player-most-started-specific-country")
+	rows, errCountryCount := dot.Query(initalize.GetDB(), "count-player-most-started-specific-country", country)
 	if errCountryCount != nil {
 		panic(errCountryCount.Error())
 	}
