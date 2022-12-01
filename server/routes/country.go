@@ -4,7 +4,6 @@ import (
 	"backend/initalize"
 	"backend/types"
 	"fmt"
-	"math"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -51,7 +50,7 @@ func GetAllCountries(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": countries, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": countries, "total_count": num_row})
 }
 
 func AverageGoalByCountry(c *gin.Context) {
@@ -93,7 +92,7 @@ func AverageGoalByCountry(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": countries, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": countries, "total_count": num_row})
 }
 
 func AverageGoalForCountry(c *gin.Context) {
@@ -136,7 +135,7 @@ func AverageGoalForCountry(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": countries, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": countries, "total_count": num_row})
 
 }
 
@@ -179,7 +178,7 @@ func WinRatio(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": countries, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": countries, "total_count": num_row})
 
 }
 
@@ -223,6 +222,6 @@ func WinRatioWithCountry(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": countries, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": countries, "total_count": num_row})
 
 }

@@ -3,7 +3,6 @@ package routes
 import (
 	"backend/initalize"
 	"backend/types"
-	"math"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -48,7 +47,7 @@ func GetAllWorldCups(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": wcs, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": wcs, "total_count": num_row})
 
 }
 
@@ -90,7 +89,7 @@ func MostPopular(c *gin.Context) {
 		}
 	}
 
-	c.JSON(200, gin.H{"data": wcs, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": wcs, "total_count": num_row})
 
 }
 
@@ -132,7 +131,7 @@ func First(c *gin.Context) {
 		}
 	}
 
-	c.JSON(200, gin.H{"data": wcs, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": wcs, "total_count": num_row})
 
 }
 
@@ -175,7 +174,7 @@ func FirstWithName(c *gin.Context) {
 		}
 	}
 
-	c.JSON(200, gin.H{"data": wcs, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": wcs, "total_count": num_row})
 
 }
 
@@ -217,7 +216,7 @@ func Podium(c *gin.Context) {
 		}
 	}
 
-	c.JSON(200, gin.H{"data": wcs, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": wcs, "total_count": num_row})
 
 }
 
@@ -260,6 +259,6 @@ func PodiumWithCountry(c *gin.Context) {
 		}
 	}
 
-	c.JSON(200, gin.H{"data": wcs, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": wcs, "total_count": num_row})
 
 }

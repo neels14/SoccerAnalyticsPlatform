@@ -3,7 +3,6 @@ package routes
 import (
 	"backend/initalize"
 	"backend/types"
-	"math"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -48,7 +47,7 @@ func GetAllPlayer(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": players, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": players, "total_count": num_row})
 
 }
 
@@ -91,7 +90,7 @@ func GetTopScorers(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": players, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": players, "total_count": num_row})
 
 }
 
@@ -135,7 +134,7 @@ func GetTopScorersWithCountry(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": players, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": players, "total_count": num_row})
 
 }
 
@@ -178,7 +177,7 @@ func GetMostStarted(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": players, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": players, "total_count": num_row})
 }
 
 func GetMostStartedWithCountry(c *gin.Context) {
@@ -221,5 +220,5 @@ func GetMostStartedWithCountry(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": players, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": players, "total_count": num_row})
 }

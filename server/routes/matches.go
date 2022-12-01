@@ -3,7 +3,6 @@ package routes
 import (
 	"backend/initalize"
 	"backend/types"
-	"math"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -48,6 +47,6 @@ func GetAllMatches(c *gin.Context) {
 
 	}
 
-	c.JSON(200, gin.H{"data": matches, "num_page": math.Ceil(float64(num_row) / float64(limit))})
+	c.JSON(200, gin.H{"data": matches, "total_count": num_row})
 
 }
