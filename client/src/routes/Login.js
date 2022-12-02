@@ -4,12 +4,13 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import UserContext from "./shared/user-context";
-import { Navigate } from "react-router-dom";
+import { Navigate, useMatch } from "react-router-dom";
 
 function Login() {
     const [errorUsername, setErrorUsername] = useState(false)
     const [errorPassword, setErrorPassword] = useState(false)
     const { user, setUser } = useContext(UserContext)
+    const isLoginURL = useMatch({ path: `/login`, end: true})
 
     const handleSubmit = (event) => {
         setErrorUsername(false)
@@ -60,6 +61,9 @@ function Login() {
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
+                {!isLoginURL &&
+                    <Typography variant="h4">Please Login to Continue</Typography>
+                }
                 <TextField
                     required
                     id="username"
