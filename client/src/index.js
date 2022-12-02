@@ -12,6 +12,7 @@ import './index.css'
 import Root from './routes/Root';
 import Home from './routes/Home';
 import Login from './routes/Login';
+import SignUp from './routes/SignUp';
 import WorldCups from './routes/WorldCups';
 import Countries from './routes/Countries';
 import Players from './routes/Players';
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login/>,
+      },
+      {
+        path: "signup",
+        element: <SignUp/>,
       },
       {
         path: "worldcups",

@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import UserContext from "./shared/user-context";
-import { Navigate, useMatch } from "react-router-dom";
+import { Link, Navigate, useMatch } from "react-router-dom";
 
 function Login() {
     const [errorUsername, setErrorUsername] = useState(false)
@@ -36,7 +36,6 @@ function Login() {
             .then(json => {
                 if (json.valid) {
                     setUser(username)
-
                 } else {
                     setErrorUsername(true)
                     setErrorPassword(true)
@@ -81,7 +80,7 @@ function Login() {
                 />
                 <Button type="submit" size="large" variant="outlined"><b>Login</b></Button>
                 <Typography>
-                Don't have an account?<Button>Sign Up</Button>
+                Don't have an account?<Button component={Link} to={`/signup`}>Sign Up</Button>
                 </Typography>
             </Box> :
             <Navigate to="/" />
