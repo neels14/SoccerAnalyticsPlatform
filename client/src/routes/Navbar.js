@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef, useContext} from 'react'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -8,6 +8,7 @@ import { ButtonBase } from '@mui/material';
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
+import UserContext from './shared/user-context';
 
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -17,6 +18,8 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
 function Navbar() {
+  const { user, setUser } = useContext(UserContext)
+
   return (
       <AppBar position="static">
         <Toolbar className='navbar'>
@@ -32,6 +35,13 @@ function Navbar() {
             <NavbarButton to='/matches'>Matches</NavbarButton>
             <Divider orientation="vertical" flexItem sx={{mx: 2}}/>
             <FeaturesMenu/>
+            <Divider orientation="vertical" flexItem sx={{mx: 2}}/>
+            {user === "" ?
+              <NavbarButton to='/login'>Login</NavbarButton> :
+              <Button color={"inherit"} onClick={() => setUser("")}>
+                Sign Out
+              </Button>
+            }
           </Box>
         </Toolbar>
       </AppBar>
